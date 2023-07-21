@@ -38,7 +38,6 @@ class Book(models.Model):
         ordering = ['-title']
 
 
-
 class Address(models.Model):
     number = models.PositiveIntegerField()
     street_name = models.CharField(max_length=100)
