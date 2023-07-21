@@ -1,25 +1,26 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 import users
-from books.models import Author
+from books.models import Author, Book
+from books.serializer import BookSerializer
 
 # Create your views here.
-students = [
-    {"name": "sheriff"},
-    {"name": "chris"},
-    {"name": "Rich"},
-]
 
 
-def welcome(request):
-    query_set = Author.objects.filter(first_name__contains="sea")
-    return render(request, "books/welcome.html", {"authors": list(query_set)})
+
+@api_view()
+def book_list(request):
+    queryset = Book.objects.all()
+    serializer = BookSerializer(queryset, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-def read(request):
-    return render(request, "books/read.html")
+@api_view
+def book_details(request, pk):
+    return Response(pk)
 
 
-def borrow(request):
-    return render(request, 'books/borrow.html')

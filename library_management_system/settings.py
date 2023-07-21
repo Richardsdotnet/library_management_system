@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     'users',
     'books',
+    'rest_framework',
 
 ]
 
