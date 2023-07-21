@@ -13,6 +13,9 @@ class Author(models.Model):
     last_name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 class Book(models.Model):
     GENRE_CHOICE = [
@@ -27,6 +30,13 @@ class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     date_published = models.DateTimeField(blank=True, null=True)
     copies = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.title}{self.isbn}"
+
+    class Meta:
+        ordering = ['-title']
+
 
 
 class Address(models.Model):
@@ -43,6 +53,3 @@ class BookInstance(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=6)
     date_borrowed = models.DateTimeField(auto_now_add=True)
     date_returned = models.DateTimeField()
-
-
-
