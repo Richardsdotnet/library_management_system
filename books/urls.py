@@ -19,7 +19,7 @@ router.register('reviews', views.ReviewViewSet)
 
 urlpatterns = router.urls
 books_router = routers.NestedDefaultRouter(router, 'books', lookup='book')
-router.register('reviews',views.ReviewViewSet,basename='book-reviews')
+router.register('reviews', views.ReviewViewSet, basename='book-reviews')
 
 urlpatterns = [
     path('', include(router.urls)),
