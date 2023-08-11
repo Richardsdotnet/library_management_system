@@ -25,4 +25,5 @@ urlpatterns = [
     path("__debug__/", include("debug_toolbar.urls")),
     path('books/', include("books.urls")),
     path('users/', include("users.urls"))
+
 ]
