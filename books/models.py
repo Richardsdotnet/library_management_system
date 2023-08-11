@@ -6,7 +6,7 @@ from django.db.models import Model
 # Create your models here.
 class User(AbstractUser):
     email = models.EmailField(unique=True)
-    phone = models.CharField(max_length=11)
+    # phone = models.CharField(max_length=11)
 
 
 class Author(models.Model):
