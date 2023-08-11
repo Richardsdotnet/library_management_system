@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 import users
 from books.models import Author, Book
-from books.serializer import BookSerializer
+from books.serializer import BookSerializer, AuthorSerializer
 
 
 # Create your views here.
@@ -23,4 +23,18 @@ def book_list(request):
 def book_details(request, pk):
     book = get_object_or_404(Book, pk=pk)
     serializer = BookSerializer(book)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view()
+def author_list(request):
+    queryset = Author.objects.all()
+    serializer = AuthorSerializer(queryset, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view()
+def author_details(request, pk):
+    author = get_object_or_404(Author, pk=pk)
+    serializer = AuthorSerializer(author)
     return Response(serializer.data, status=status.HTTP_200_OK)
