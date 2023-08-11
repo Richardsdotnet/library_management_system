@@ -1,25 +1,40 @@
+
 from rest_framework import serializers
 
-
-class BookSerializer(serializers.Serializer):
-    def update(self, instance, validated_data):
-        pass
-
-    def create(self, validated_data):
-        pass
-
-    title = serializers.CharField(max_length=200)
-    isbn = serializers.CharField(max_length=13)
-    genre = serializers.CharField(max_length=20)
+from books.models import Author, Book, ReviewModel, BookInstance
 
 
-class AuthorSerializer(serializers.Serializer):
-    def update(self, instance, validated_data):
-        pass
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = ['first_name', 'last_name', 'email']
 
-    def create(self, validated_data):
-        pass
 
-    first_name = serializers.CharField(max_length=200)
-    last_name = serializers.CharField(max_length=200)
-    email = serializers.CharField(max_length=20)
+class BookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = ['id', 'title', 'isbn', 'genre', 'copies', 'author']
+
+
+class CreateAuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = ['id', 'first_name', 'last_name', 'email']
+
+
+class CreateBookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = ['id', 'title', 'isbn', 'genre', 'copies', 'author']
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ReviewModel
+        fields = ['id', 'reviewer_name', 'description', 'book']
+
+
+class BookInstanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookInstance
+        fields = ['book', 'user', 'price', 'date_returned']
